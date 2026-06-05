@@ -1,0 +1,1 @@
+Nothing should be ignored based on the provided file changes. The only added file is ARCHITECTURE_PLAN.md, which is a markdown document that should be tracked in version control. No build artifacts, dependencies, temporary files, or other ignorable items are present in the changes.
