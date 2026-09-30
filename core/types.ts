@@ -1,8 +1,17 @@
 export type GamePhase = 'LOBBY' | 'PLAYING' | 'FINISHED';
 
+export type PlayerType = 'HUMAN' | 'AI';
+
 export interface Player {
   id: string;
   name: string;
+  faction: string;
+  color: string;
+  controlledTerritoryIds: string[];
+  treasury: number;
+  totalArmy: number;
+  alive: boolean;
+  humanOrAI: PlayerType;
 }
 
 export interface Territory {

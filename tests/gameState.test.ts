@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { createGameState, addPlayer, startGame, tickGame, setGameOver } from '../core/gameState';
-import { Player } from '../core/types';
+
+import { createPlayer } from '../core/player';
 
 describe('GameState', () => {
   it('should create a new game with default values', () => {
@@ -14,7 +15,7 @@ describe('GameState', () => {
 
   it('should add players during LOBBY phase', () => {
     let state = createGameState('game-1');
-    const player1: Player = { id: 'p1', name: 'Alice' };
+    const player1 = createPlayer('p1', 'Alice', 'Red', '#ff0000', 'HUMAN');
 
     state = addPlayer(state, player1);
     expect(state.players).toHaveLength(1);
@@ -24,7 +25,7 @@ describe('GameState', () => {
 
   it('should transition to PLAYING phase', () => {
     let state = createGameState('game-1');
-    state = addPlayer(state, { id: 'p1', name: 'Alice' });
+    state = addPlayer(state, createPlayer('p1', 'Alice', 'Red', '#ff0000', 'HUMAN'));
     state = startGame(state);
 
     expect(state.gamePhase).toBe('PLAYING');
@@ -32,7 +33,7 @@ describe('GameState', () => {
 
   it('should process initial tick correctly', () => {
     let state = createGameState('game-1');
-    state = addPlayer(state, { id: 'p1', name: 'Alice' });
+    state = addPlayer(state, createPlayer('p1', 'Alice', 'Red', '#ff0000', 'HUMAN'));
     state = startGame(state);
 
     state = tickGame(state, 1.0);
@@ -42,7 +43,7 @@ describe('GameState', () => {
 
   it('should handle game-over state correctly', () => {
     let state = createGameState('game-1');
-    state = addPlayer(state, { id: 'p1', name: 'Alice' });
+    state = addPlayer(state, createPlayer('p1', 'Alice', 'Red', '#ff0000', 'HUMAN'));
     state = startGame(state);
 
     state = setGameOver(state, 'p1');
